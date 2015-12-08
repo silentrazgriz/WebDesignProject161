@@ -66,28 +66,31 @@ video {
 
     opacity: 1;
 
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -ms-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 1.2s cubic-bezier(0.4,0,1,0);
+    -moz-transition: all 1.2s cubic-bezier(0.4,0,1,0);
+    -ms-transition: all 1.2s cubic-bezier(0.4,0,1,0);
+    -o-transition: all 1.2s cubic-bezier(0.4,0,1,0);
+    transition: all 1.2s cubic-bezier(0.4,0,1,0);
 }
 
 .big-icon .big-bottom-line {
     position: absolute;
-    right: 0;
     bottom: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
     height: 10px;
-    width: 4px;
+    width: 10px;
     background-color: transparent;
 
-    opacity: 0.6;
-
-    -webkit-transition: all 1.1s ease-in-out;
-    -moz-transition: all 1.1s ease-in-out;
-    -ms-transition: all 1.1s ease-in-out;
-    -o-transition: all 1.1s ease-in-out;
-    transition: all 1.1s ease-in-out;
+    -webkit-transition: all 1s cubic-bezier(0.4,0,1,0);
+    -moz-transition: all 1s cubic-bezier(0.4,0,1,0);
+    -ms-transition: all 1s cubic-bezier(0.4,0,1,0);
+    -o-transition: all 1s cubic-bezier(0.4,0,1,0);
+    transition: all 1s cubic-bezier(0.4,0,1,0);
 }
 
 .big-icon img {
@@ -105,15 +108,40 @@ video {
 }
 
 .big-icon:hover .big-bottom-line {
-    height: 100%;
+    width: 100%;
     background-color: #333333;
+    box-shadow: 0 0 20px #ffffff;
+
+    -webkit-transition: all 1s cubic-bezier(0,0.4,0,1);
+    -moz-transition: all 1s cubic-bezier(0,0.4,0,1);
+    -ms-transition: all 1s cubic-bezier(0,0.4,0,1);
+    -o-transition: all 1s cubic-bezier(0,0.4,0,1);
+    transition: all 1s cubic-bezier(0,0.4,0,1);
 }
 
 .big-icon:hover .big-title {
     opacity: 0;
+    cursor: default;
+
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
 .big-icon:hover img {
     bottom: 0%;
     opacity: 1;
+}
+
+.next-action {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.next-action a {
+
 }
