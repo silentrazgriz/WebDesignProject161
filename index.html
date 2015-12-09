@@ -1,23 +1,164 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Nintendo 3DS XL</title>
+		<title>Nintenbo 3DS XL</title>
         <link rel="shortcut icon" href="resource/image/icon.png">
 		<link rel="stylesheet" href="resource/css/normalize.css" />
 		<link rel="stylesheet" href="resource/css/responsive.css" />
+        <link rel="stylesheet" href="resource/css/glyphicon.css" />
 		<link rel="stylesheet" href="resource/css/default.css" />
+        <script type="text/javascript" src="resource/js/jquery-1.11.3.min.js"></script>
 	</head>
 	<body>
-        <video autoplay loop>
-            <source src="resource/video/Mario Kart 8.webm" type="video/webm">
-        </video>
-        <div class="big-icon">
-            <img src="resource/image/nintendo-3ds.png"/>
-            <div class="big-title">see more, hover here</div>
-            <div class="big-bottom-line"></div>
+        <div class="navigation">
+            <div class="nav-prev align-center">
+                <span class="glyphicon glyphicon-chevron-up" id="prev"></span>
+            </div>
+            <div class="nav-next align-center">
+                <span class="glyphicon glyphicon-chevron-down" id="next"></span>
+            </div>
         </div>
-        <div class="next-action">
-            <a href="#"></a>
+        <div class="content-block" id="landing-page">
+            <video autoplay loop>
+                <source src="resource/video/Mario Kart 8 360p.webm" type="video/webm">
+            </video>
+            <div class="big-icon absolute-middle-center">
+                <img src="resource/image/nintendo-3ds.png"/>
+                <div class="big-title absolute-middle-center">hey, over here!</div>
+                <div class="big-bottom-line absolute-bottom-center"></div>
+            </div>
         </div>
+        <div class="content-block first-color info-background" id="info">
+            <div class="container absolute-middle-center">
+                <div class="row">
+                    <div class="c-tab-7 c-tab-push-5 c-mob-12 anim out-right">
+                        <div class="title">Exclusive games</div>
+                        <div>
+                            From Super Slash Bros.™ for Nintenbo 3DS to Pogémon™, Animal Brossing™ to Metromid™, the Nintenbo 3DS family of handheld systems are home to fan-favorites you can’t find anyplace else.
+                        </div>
+                    </div>
+                    <div class="c-tab-5 c-tab-pull-7 align-center anim out">
+                        <img class="exclusive-games" src="resource/image/exclusive-games.png">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="c-tab-7 c-mob-12 c-tab-push-0 anim out-left">
+                        <div class="title">Nintenbo DS games, too</div>
+                        <div>
+                            The New Nintenbo 3DS XL can play all Nintenbo 3DS games, plus nearly all games from previous systems such as Nintenbo DS and Nintenbo DSi. And, some titles will be exclusively playable on the New Nintenbo 3DS XL.
+                        </div>
+                    </div>
+                    <div class="c-tab-5 align-center anim out">
+                        <img class="compatibility" src="resource/image/compatibility.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-block second-color buy-background" id="buy-now">
+            <div class="container absolute-middle-center">
+                <div class="row align-center">
+                    <div class="c-tab-6 c-mob-12">
+                        <div class="red-3ds">
+                            <button class="absolute-middle-center">$179.99</button>
+                        </div>
+                    </div>
+                    <div class="c-tab-6 c-mob-12">
+                        <div class="black-3ds">
+                            <button class="absolute-middle-center">$199.99</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-center">
+                    <div class="c-tab-12 c-mob-12">
+                        <span class="price">the <strong>best</strong> way to <strong>play</strong> games <strong>on-the-go</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-block demo-background" id="demo">
+            <div class="absolute-middle-center n3ds-background">
+                <div class="filler-big-screen"></div>
+                <canvas id="top-canvas" class="big-screen" width="316" height="192"></canvas>
+                <canvas id="bottom-canvas" class="small-screen" width="256" height="192"></canvas>
+                <img id="cvs-sprite" src="resource/image/snake/sprite.png"/>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="resource/js/snake.js"></script>
+        <script type="text/javascript" src="resource/js/food.js"></script>
+        <script type="text/javascript" src="resource/js/game.js"></script>
+        <script>
+            var contents = ['#landing-page', '#info', '#buy-now', '#demo'];
+            var currentContent = 0;
+
+            $(function() {
+                $(window).bind('mousewheel DOMMouseScroll', function (e) {
+                    if (e.originalEvent.wheelDelta < 0 || e.originalEvent.detail > 0) {
+                        nextContent();
+                    } else {
+                        previousContent();
+                    }
+                    return false;
+                });
+
+                $(window).resize(function() {
+                    scrollToCurrentContent(1);
+                });
+
+                $('#next').click(function() {
+                    nextContent();
+                    return false;
+                });
+
+                $('#prev').click(function() {
+                    previousContent();
+                    return false;
+                });
+
+                $('.big-icon').mouseout(function() {
+                    $('.big-icon img, .big-icon .big-title, .big-icon .big-bottom-line').addClass('lock');
+                });
+
+                $('button').click(function() {
+                    return false;
+                });
+
+                scrollToCurrentContent(500);
+            });
+
+            function previousContent() {
+                if (currentContent > 0) {
+                    currentContent--;
+                    scrollToCurrentContent(1000)
+                }
+            }
+
+            function nextContent () {
+                if (currentContent < contents.length - 1) {
+                    currentContent++;
+                    scrollToCurrentContent(1000);
+                }
+            }
+
+            function scrollToCurrentContent (time) {
+                $('body').animate({
+                    scrollTop: $(contents[currentContent]).offset().top
+                }, time, function() {
+                    if (currentContent == 1) {
+                        $('.out-left, .out-right, .out').removeClass('out-left out-right out');
+                    }
+                });
+                validateNavigation();
+            }
+
+            function validateNavigation () {
+                $('.nav-prev, .nav-next').show();
+                if (currentContent == 0) {
+                    $('.nav-prev').hide();
+                } else if (currentContent == contents.length - 1) {
+                    $('.nav-next').hide();
+                }
+            }
+        </script>
 	</body>
 </html>
