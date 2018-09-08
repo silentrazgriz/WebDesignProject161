@@ -141,7 +141,7 @@
             }
 
             function scrollToCurrentContent (time) {
-                $('body').animate({
+                $('html,body').animate({
                     scrollTop: $(contents[currentContent]).offset().top
                 }, time, function() {
                     if (currentContent == 1) {
